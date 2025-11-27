@@ -136,4 +136,6 @@ http://localhost:5000
 ```
 
 > Make sure you have [Node.js](https://nodejs.org/) and [Git](https://git-scm.com/) installed on your machine.
+---
+>This project was **developed entirely from scratch** by me, without any contributions from other developers.
 
