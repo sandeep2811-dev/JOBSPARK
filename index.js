@@ -16,7 +16,7 @@ const nodemailer_pass = process.env.node_mail_pass;
 const _dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
-const port = 3000;
+const port = process.env.port || 3000;
 const db = new pg.Client({
     user:"postgres",
     host:"localhost",
@@ -404,7 +404,7 @@ app.post("/reset-password", async (req, res) => {
     }
 });
 app.listen(port, () => {
-    console.log("running at 3000 ");
+    console.log(`running at ${port} `);
 })
 
 
