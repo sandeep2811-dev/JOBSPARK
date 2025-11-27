@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My posted Jobs</title>
+  <style>
+    body::-webkit-scrollbar { display: none; }
+    :root{
+      --bg: #0b0c10;
+      --panel: #121318;
+      --panel-2: #161823;
+      --text: #e8eaed;
+      --muted: #9aa0a6;
+      --brand: #7c3aed;
+      --brand-2: #22d3ee;
+      --border: #2a2f3a;
+    }
+    [data-theme="light"]{
+      --bg: #f7f8fb;
+      --panel: #ffffff;
+      --panel-2: #f3f4f8;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --brand: #7c3aed;
+      --brand-2: #0891b2;
+      --border: #e5e7eb;
+    }
+    html, body{
+      background: transparent;
+      color: var(--text);
+      margin:0;
+      padding:0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial;
+    }
+    .container{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      padding-left: 30px;
+    }
+    .job-card{
+      width: 300px;
+      padding-left: 30px;
+      border: 1px solid var(--border);
+      border-radius:10px;
+      padding:20px; 
+      margin:20px;
+      background: var(--panel);
+      box-shadow: 0 8px 32px rgba(243, 116, 32, 0.18);
+      color:var(--muted);
+    }
+    p{
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color:var(--muted);
+    }
+    header{
+            display:flex; align-items:center; justify-content: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+    @media (max-width: 720px){
+      .container{ padding: 12px; margin: 0 12px; }
+      .job-card{ width: 300px; margin: 12px auto; padding: 16px; border-radius: 12px; }
+      
+    }
+
+    /* Mobile floating menu button */
+    #mobileMenuBtn {
+     
+      top: 12px;
+      left: 12px;
+      z-index: 9999;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      display: none;
+      font-size: 22px;
+      width: 44px;
+      height: 44px;
+      line-height: 44px;
+      text-align: center;
+      margin-top: 20px;
+    }
+    @media screen and (max-width: 720px) {
+      #mobileMenuBtn {
+        display: inline-flex !important;
+        justify-content: center;
+        align-items: center;
+      }
+       header{ display: flex; align-items: flex-start; gap:50px; justify-content: flex-start; width: 100%;  padding-left: 10px;}
+       h1{
+        font-size: 1.5rem;
+        padding-top: 10px;
+       }
+    }
+  </style>
+</head>
+<body>
+  <!-- Only hamburger icon, no text -->
+   <header>
+  <button id="mobileMenuBtn">☰</button>
+
+  <h1 style="text-align: center; color: chocolate; margin-top:20px; letter-spacing: 1px;">My Posted Jobs</h1>
+  </header>
+  <div class="container">
+    <% if(jobs.length == 0){ %>
+      <h2 style="color:white; text-align:center;">You have not posted any jobs yet.</h2>
+    <% } else { %>
+      <% jobs.forEach(function(job){ %>
+        <div class="job-card">
+          <h2 style="color:chocolate;"><%= job.title %></h2>
+          <p style="color:white;"><strong>Company:</strong> <%= job.company %></p>
+          <p style="color:white;"><strong>Location:</strong> <%= job.loc %></p>
+          <p style="color:white;"><strong>Salary:</strong> <%= job.salary %></p>
+          <p style="color:white;"><strong>Posted on:</strong> <%= date[0].formatted_date %></p>    
+          <p style="color:white;"><strong>Description:</strong> <%= job.description %></p>
+          <button style="background: chocolate; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer;" onclick="window.open('<%= job.joblink %>', '_blank')">Apply Now</button>
+        </div>
+      <% }); %>
+    <% } %>
+  </div>
+
+  <script>
+    // Open parent sidebar on mobile when the button is clicked
+    (function(){
+      var btn = document.getElementById('mobileMenuBtn');
+      if(btn){
+        btn.addEventListener('click', function(){
+          try{ window.parent.postMessage({ type: 'openSidebar' }, '*'); }catch(e){}
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOBSPARK</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+    <section class="navtext">
+        <nav class="navbar navbar-expand-lg navbar-brand-bg navbar-dark" id="menu">
+            
+  <div class="container-fluid">
+
+    
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 " id="some">
+        
+        <li class="nav-item">
+            <img src="/public/logo.jfif" alt="logo" class="logo">
+        </li>
+         <li class="nav-item list1">
+          <a class="nav-link title" id="title" href="#"><h4 style="color:chocolate">JOBSPARK</h4></a>
+        </li>
+      </ul>
+
+    </div>
+    <div class="hamaburger">
+      <button id="menu button"class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./carriers.ejs">Careers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./about.ejs">About</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="./contact.ejs">Contact</a>
+        </li>
+        </ul>
+
+
+        </div>
+  </div>
+</nav>
+    </section>
+<section class="page1">
+    <div class="container-1 col-6-md">
+       <h1 class="first">
+        JOBSPARK 
+       </h1>
+       <br>
+       <p class="context">A cross platform that connects job seekers with potential employers, providing a space for job listings, applications, and career resources. It aims to streamline the job search process and enhance employment opportunities for users.</p>
+       <br/>
+       <ul class="points">
+        <li>Connects job seekers, employers easily.
+            </li>
+            <li>Efficient job matching, application process.
+            </li>
+            <li>Personalized recommendations, career development tools.</li>
+       </ul>
+    </div>
+    <div class="form col-6-md">
+      <h3>Recruiter Login</h3>
+      <br/>
+      <div>
+        <% if(locals.message) {%>
+          <p><%= message %></p>
+          <% } %>
+      </div>
+        <form action="/login" method="post">
+
+        
+        <div>
+      
+            <input type="email" id="email" placeholder="email id" name="email" required>
+        </div>
+        <br/>
+        <div>
+          
+            <input type="password" id="password" name="password" placeholder="password" required>
+        </div>
+      </br>
+      
+        <div class="flex">
+        <center><button type="submit" name="submit" class="submit">Login</button></center>
+        <a href="./forgot.ejs" class="forget">Forgot password?</a>
+      
+        <p class="color-text"> dont you have an account <a href="./register.ejs" class="register">Register</a> </p>
+        </div>
+        <div style="text-align:center; margin-top:10px;">
+            <button type="button" class="google-login-btn">
+                <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google logo" style="width:20px; vertical-align:middle; margin-right:8px;">Login with Google
+            </button>
+        </div>
+    </form>
+    </div>
+    </section>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('a').forEach(function(link) {
+        // Only fade out for internal links
+        link.addEventListener('click', function(e) {
+            const href = link.getAttribute('href');
+            if (href && !href.startsWith('http') && !href.startsWith('#') && !link.hasAttribute('target')) {
+                e.preventDefault();
+                document.body.style.transition = 'opacity 0.5s';
+                document.body.style.opacity = 0;
+                setTimeout(function() {
+                    window.location = href;
+                }, 500);
+            }
+        });
+    });
+});
+</script>
+  
+    
+</body>
+</html>

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carriers</title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            background-color: black;
+            /* background-image: url("./public/iPad\ _\ Mac\ _\ Wallpaper\ _\ HD\ \(1\).jpeg.jpg"); */
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        body, .page-fade {
+    opacity: 0;
+    animation: fadeInPage 0.7s ease-in forwards;
+}
+@keyframes fadeInPage {
+    to {
+        opacity: 1;
+    }
+}
+        .navbar-brand-bg{
+    /* background-image: url(./public/iPad\ _\ Mac\ _\ Wallpaper\ _\ HD\ \(1\).jpeg.jpg); */
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+        #title, .nav-link.title#title {
+    color: chocolate !important;
+    font-weight: 700;
+}
+        .container {
+            width: 100%;
+            max-width: 440px;
+            margin: 32px auto 0 auto;
+            border-radius: 28px;
+            padding: 38px 28px 28px 28px;
+            box-shadow: 0 8px 32px rgba(243, 116, 32, 0.18);
+            /* background: linear-gradient(135deg, rgba(255,255,255,0.95) 70%, rgba(207,222,243,0.85) 100%); */
+            background-color: black;
+            border: 1px solid black;
+            backdrop-filter: blur(6px);
+            position: relative;
+            z-index: 2;
+        }
+        .container:hover {
+            box-shadow: 0 8px 32px rgba(243, 116, 32, 0.18);
+            transform: scale(1.03);
+        }
+        .form-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            color: chocolate;
+            letter-spacing: 1px;
+            /* text-shadow: 0 2px 8px #e0eafc; */
+        }
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        input[type="text"], input[type="number"] {
+            padding: 12px 14px;
+            border: 1px solid #b0b0b0;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background: rgba(240,240,255,0.85);
+            box-shadow: 0 2px 8px rgba(79,140,255,0.08);
+        }
+        input[type="text"]:focus, input[type="number"]:focus {
+            border-color: chocolate;
+            background: #fff;
+            box-shadow: 0 0 0 2px #e0eafc;
+        }
+        input[type="submit"], input[type="reset"] {
+            padding: 12px 0;
+            border-radius: 10px;
+            border: none;
+            background: linear-gradient(90deg, chocolate 60%, #4f8cff 100%);
+            color: #fff;
+            font-size: 1.08rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+            box-shadow: 0 2px 8px rgba(79,140,255,0.12);
+            letter-spacing: 1px;
+        }
+        input[type="submit"]:hover {
+            background: linear-gradient(90deg, chocolate 60%, chocolate 100%);
+            box-shadow: 0 4px 16px rgba(79,140,255,0.18);
+            transform: translateY(-2px) scale(1.04);
+        }
+        input[type="reset"] {
+            background: linear-gradient(90deg, #e0eafc 60%, #cfdef3 100%);
+            color: chocolate;
+            margin-top: 4px;
+        }
+        input[type="reset"]:hover {
+            background: linear-gradient(90deg, #cfdef3 60%, #e0eafc 100%);
+            color: chocolate;
+            box-shadow: 0 4px 16px rgba(79,140,255,0.10);
+            transform: translateY(-2px) scale(1.04);
+        }
+        .jobs-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            justify-content: center;
+            margin: 48px auto 0 auto;
+            max-width: 1100px;
+            z-index: 1;
+        }
+        .jobs-row {
+            display: flex;
+            gap: 24px;
+            width: 100%;
+            justify-content: center;
+            margin-bottom: 0;
+        }
+        .job-container {
+    flex: 1 1 320px;
+    max-width: 340px;
+    min-width: 260px;
+    /* White background */
+    border-radius: 18px;
+    /*box-shadow: 0 4px 18px white;  light brown shadow */
+    padding: 22px 18px;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 1.5px solid white;
+    opacity: 0;
+    transform: translateY(60px) scale(0.98);
+    transition: box-shadow 0.3s, transform 0.3s, opacity 0.5s;
+    will-change: opacity, transform;
+}
+.job-container.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    animation: jobFadeIn 0.8s cubic-bezier(.23,1.01,.32,1) forwards;
+}
+.job-container:hover {
+    box-shadow: 0 8px 32px rgba(160, 82, 45, 0.18);
+    border-color: white
+    ;
+    transform: scale(1.03);
+}
+.job-container h4 {
+    margin: 0 0 10px 0;
+    color: chocolate;
+    font-size: 1.18rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.job-container p {
+    margin: 4px 0;
+    font-size: 1rem;
+    color: black;
+}
+.job-container .company,
+.job-container .location,
+.job-container .stipend {
+    color: black;
+    font-weight: 600;
+}
+        .logo{
+    width:60px;
+    height:60px;
+    border-radius: 50%;
+}
+.navtext{
+    font-size: 20px;
+    font-weight:50px;
+    color:#ffffff;
+}
+.navbar-nav .nav-link {
+    color: #fff !important;
+}
+.navbar-nav .nav-link.active {
+    color: #fff !important;
+    font-weight: bold;
+}
+        /* Links remain blue or default */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        @keyframes jobFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(60px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+        @media (max-width: 900px) {
+            .jobs-row {
+                gap: 16px;
+            }
+            .job-container {
+                max-width: 95vw;
+            }
+        }
+        @media (max-width: 600px) {
+            .jobs-row {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .job-container {
+                max-width: 98vw;
+            }
+        }
+
+           .container_jobs{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        justify-content: center;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    .job-card{
+        flex: 0 1 calc(25% - 24px);
+        min-width: 220px;
+        max-width: 340px;
+        padding:20px;
+        border: 1px solid var(--border);
+        border-radius:10px;
+        background: var(--panel);
+        box-shadow: 0 8px 32px rgba(243, 116, 32, 0.18);
+        box-sizing: border-box;
+        margin: 0;
+    }
+
+    /* responsive breakpoints */
+    @media (max-width: 1100px){
+        .job-card{ flex: 0 1 calc(33.333% - 24px); }
+    }
+    @media (max-width: 800px){
+        .job-card{ flex: 0 1 calc(50% - 18px); }
+        
+    
+    #menu button{
+        border: none;
+        background: none;   
+        transition: none;
+    }
+    #heading{
+        margin-left:5px;
+    }
+    #menu button:active, #menu button:hover{
+        box-shadow: none;
+        transform: none;
+    }
+    .container{
+        width:90vw;
+        padding-top: 10px;
+        height: auto;
+        border: none;
+        background-color: none;
+        display: flex;
+        flex-direction: column;
+        /* align-items: flex-start; */
+    }
+    #menu{
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 8px;
+        justify-content: center;
+    }
+    .hamaburger{
+        padding-top: 15px;
+        padding-left: 220px;
+        position: absolute;
+        z-index: 4;
+        
+    }
+    }
+    @media (max-width: 480px){
+        .job-card{ flex: 0 1 100%; min-width: auto; }
+    
+    }
+    .actively_hiring_jobs{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 40px 0;
+        height: 12vh; /* adjust as needed to move the heading vertically */
+    }
+    .actively_hiring_jobs h1{
+        color: chocolate;
+        font-size: 2rem;
+        margin: 0;
+        letter-spacing: 1px;
+        text-align: center;
+    }
+    #some{
+        display: flex;
+        flex-direction: row;
+        margin-top:10px;
+    }
+    #heading{
+        margin-top:8px;
+    }
+    </style>
+</head>
+<body>
+     <section class="navtext">
+        <nav class="navbar navbar-expand-lg navbar-brand-bg navbar-dark" id="menu">
+            
+  <div class="container-fluid">
+
+    
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 " id="some">
+        
+        <li class="nav-item">
+            <img src="/public/logo.jfif" alt="logo" class="logo">
+        </li>
+         <li class="nav-item list1" id="heading">
+          <a class="nav-link title" id="title" href="#"><h4 style="color:chocolate">JOBSPARK</h4></a>
+        </li>
+      </ul>
+
+    </div>
+    <div class="hamaburger">
+      <button id="menu button"class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link " aria-current="page" href="./index.ejs">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Careers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./about.ejs">About</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="./contact.ejs">Contact</a>
+        </li>
+        </ul>
+
+
+        </div>
+  </div>
+</nav>
+    </section>
+    <div class="container">
+        <div class="form-title">Explore Your Career</div>
+        <form action="/carriers" method="post">
+            <input type="text" name="jobname" placeholder="Job Title" required>
+            <input type="text" name="location" placeholder="Location" required>
+            <input type="text" name="job type" placeholder="Remote or Not" required>
+            <input type="number" name="maxitems" placeholder="Number of jobs to display" required>
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset">
+        </form>
+    </div>
+    <div class="actively_hiring_jobs">
+        <h1>Actively Hiring Jobs</h1>
+    </div>
+    <div class="container_jobs">
+        <% if(jobs.length == 0){ %>
+            <h2 style="color:white; text-align:center;">You have not posted any jobs yet.</h2>
+        <% } else { %>
+            <% jobs.forEach(function(job, i){ 
+                 const location = job.loc || job.location || job.city || job.town || job.address || 'N/A';
+                 const salary = job.salary || job.stipend || job.pay || job.ctc || job.compensation || 'N/A';
+                 const description = job.description || job.desc || job.summary || job.details || 'N/A';
+                 let rawDate = (typeof date !== 'undefined' && Array.isArray(date) && date[i] && date[i].formatted_date)
+                               ? date[i].formatted_date
+                               : (job.posted_on || job.postedOn || job.postedAt || job.created_at || job.date || '');
+                 let postedDisplay = 'N/A';
+                 if (rawDate) {
+                   const parsed = new Date(rawDate);
+                   postedDisplay = !isNaN(parsed) ? parsed.toLocaleDateString('en-GB') : rawDate;
+                 } else {
+                   // generate random date between one month ago and today
+                   const now = new Date();
+                   const past = new Date();
+                   past.setMonth(past.getMonth() - 1);
+                   const startTs = past.getTime();
+                   const endTs = now.getTime();
+                   const randTs = Math.floor(Math.random() * (endTs - startTs + 1)) + startTs;
+                   postedDisplay = new Date(randTs).toLocaleDateString('en-GB');
+                 }
+            %>
+              <div class="job-card">
+                <h4 style="color:chocolate;"><%= job.title || job.job_title || job.position || 'Untitled' %></h4>
+                <p style="color:white;"><strong>Company:</strong> <%= job.company || job.company_name || job.employer || 'N/A' %></p>
+                <p style="color:white;"><strong>Location:</strong> <%= location %></p>
+                <p style="color:white;"><strong>Salary:</strong> <%= salary %></p>
+                <p style="color:white;"><strong>Posted on:</strong> <%= postedDisplay %></p>
+                <p style="color:white;"><strong>Description:</strong> <%= description %></p>
+                <button style="background: chocolate; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer;" onclick="window.open('<%= job.joblink || job.job_url || job.url || '#' %>', '_blank')">Apply Now</button>
+              </div>
+            <% }); %>
+        <% } %>
+    </div>
+    <% if(locals.search_jobs&& Array.isArray(search_jobs)) { %>
+    <div class="jobs-grid">
+        <% let count = 0; %>
+        <% search_jobs.forEach((job, idx) => { %>
+            <% if (count % 3 === 0) { %>
+                <div class="jobs-row">
+            <% } %>
+                    <div class="job-container" style="animation-delay: <%= (count % 3) * 0.15 %>s;">
+                        <h4><%= job.title %></h4>
+                        <p><strong>Company:</strong> <span class="company"><%= job.company %></span></p>
+                        <p><strong>Location:</strong> <span class="location"><%= job.location %></span></p>
+                        <p><strong>Salary:</strong> <span class="stipend"><%= job.stipend %></span></p>
+                        <a href="<%= job.job_url %>" target="_blank">View Job</a>
+                    </div>
+            <% count++; %>
+            <% if (count % 3 === 0 || idx === jobs.length - 1) { %>
+                </div>
+            <% } %>
+        <% }) %>
+    </div>
+    <% } %>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Fade out on link click (already present)
+    document.querySelectorAll('a').forEach(function(link) {
+        const href = link.getAttribute('href');
+        link.addEventListener('click', function(e) {
+            if (href && !href.startsWith('http') && !href.startsWith('#') && !link.hasAttribute('target')) {
+                e.preventDefault();
+                document.body.style.transition = 'opacity 0.5s';
+                document.body.style.opacity = 0;
+                setTimeout(function() {
+                    window.location = href;
+                }, 500);
+            }
+        });
+    });
+
+    // Intersection Observer for job-container scroll animations
+    const jobContainers = document.querySelectorAll('.job-container');
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        jobContainers.forEach(el => observer.observe(el));
+    } else {
+        // Fallback for old browsers
+        jobContainers.forEach(el => el.classList.add('visible'));
+    }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>register</title>
+    <style>
+        body{
+            /* background-image: url("./public/iPad\ _\ Mac\ _\ Wallpaper\ _\ HD\ \(1\).jpeg.jpg"); */
+            background-color: black;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color:white;
+        }
+        .container{
+            display: flex;
+            flex-direction:column;
+            justify-content: space-evenly;
+            align-items: center;
+            border:1px solid black;
+            border-radius: 10px;
+            margin-top:70px;
+            padding-top: 20px;
+            width:500px;
+            margin-left: 400px;
+            padding-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(243, 116, 32, 0.18);
+        
+        }
+        input{
+            width:350px;
+            border:1px solid white;
+            border-radius:10px;
+            height: 30px;
+        }
+        .agree{
+            height: 15px;
+            width:15px;
+        }
+        button{
+            border:1px solid black;
+            border-radius: 5px;
+            height: 30px;
+            background-color: chocolate;
+        }
+        a{
+            color:chocolate;
+        }
+        h1{
+            color: chocolate;
+            letter-spacing: 1px;
+        }
+        .complete{
+            display: flex;
+            flex-direction: row;
+            gap:10px;
+            justify-content: center;
+            align-items: center;
+            width:max-content;
+            border: 1px solid gray;
+            border-radius: 10px;
+        }
+        @media (max-width:768px){
+            .container{
+                width:90vw;
+                padding-left: 10px;
+                margin-left: 1px;
+                inbox-sizing: border-box ;
+                margin-top:10px;
+            }
+            input{
+                width:220px;
+            }
+            h1{
+                font-size: 25px;
+                padding-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Recruiter Registration.</h1>
+        <form action="/register" method="post">
+           <center> <input type="text" name="fname" class="name" placeholder="First Name" required>
+            <br/>
+            <br/>
+            <input type="text" name="lname" class="name" placeholder="Last name / Surname" required>
+            <br/>
+            <br/>
+            <input type="text" name="username" class="name" placeholder="username" required>
+            <br/>
+            <br/>
+            <input type="email" name="email" class="email" placeholder="gmail" required>
+            <br/>
+            <br/>
+            <input type="password" name="password" class="password" placeholder="Password" required>
+            <br/>
+            <br/>
+            <input  type="tel" name="mobile" class="mobile" placeholder="Mobile " pattern="[6-9]{1}[0-9]{9}" maxlength="10" required>
+            <br/>
+            <br/>
+            </center>
+           <center> <input type="checkbox" name="agree" class="agree" required>Are you agree with above mentioned details.</center>
+            <br/>
+           <center> <button type="submit" class="submit" name="submit" onclick="display()">Register</button> </center>
+           <br/>
+            <center>already have you an account</center>
+            <br/>
+        </form>
+        <center><a href="/">Login</a></center>
+        <script>
+            <% if(locals.message){ %>
+                alert("<%= message %>");    
+            <% } %> 
+        </script>
+</body>
+</html>

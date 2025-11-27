@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard · JOBSPARK</title>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <style>
+        :root{
+            --bg: #0b0c10;
+            --panel: #121318;
+            --panel-2: #161823;
+            --text: #e8eaed;
+            --muted: #9aa0a6;
+            --brand: #7c3aed; /* purple-600 */
+            --brand-2: #22d3ee; /* cyan-400 */
+            --border: #2a2f3a;
+            --shadow: 0 10px 30px rgba(0,0,0,0.35);
+        }
+        [data-theme="light"]{
+            --bg: #f7f8fb;
+            --panel: #ffffff;
+            --panel-2: #f3f4f8;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --brand: #7c3aed;
+            --brand-2: #0891b2;
+            --border: #e5e7eb;
+            --shadow: 0 10px 30px rgba(2,6,23,0.08);
+        }
+        li{
+            color: #9aa0a6;
+        }
+
+        *{ box-sizing: border-box; }
+        body{
+            margin:0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+            background: var(--bg);
+            color: var(--text);
+            display:flex;
+            min-height: 100vh;
+            overflow: hidden; /* hide page scrollbar; we'll scroll inside .content */
+        }
+        a{ color: inherit; text-decoration: none; }
+
+        /* Sidebar */
+        .sidebar{
+            width: 280px;
+            min-height: 100vh;
+            position: sticky;
+            top: 0;
+            background: linear-gradient(180deg, var(--panel) 0%, var(--panel-2) 100%);
+            border-right: 1px solid var(--border);
+            padding: 20px 16px;
+            box-shadow: var(--shadow);
+            display:flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .brand{
+            display:flex;
+            align-items:center;
+            gap: 12px;
+            padding: 8px 10px;
+        }
+        .brand-logo{
+            width: 50px; height: 50px; border-radius: 8px;
+            background: linear-gradient(135deg, var(--brand), var(--brand-2));
+        }
+        .brand-name{ font-weight: 700; font-size: larger; color:chocolate; letter-spacing: .3px; }
+
+        .user-box{
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--panel);
+            box-shadow: 0 8px 32px rgba(243, 116, 32, 0.18);
+
+        }
+        .user-box:hover{
+            transform: scale(1.05);
+        }
+        .menu{
+            display:flex; flex-direction: column; gap: 6px;
+            padding: 8px;
+        }
+        .menu a{
+            padding: 10px 12px;
+            border-radius: 10px;
+            color: var(--text);
+            border: 1px solid transparent;
+        }
+        .menu a:hover{
+            background: var(--panel-2);
+            border-color: var(--border);
+        }
+        .menu a.active, .menu a[aria-current="page"]{
+            background: chocolate;
+            color: #fff;
+            border-color: transparent;
+        }
+
+        .theme-toggle{
+            margin-top: auto;
+            display:flex; align-items:center; justify-content: space-between;
+            gap: 8px;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--panel);
+        }
+        .toggle-btn{
+            cursor: pointer;
+            border: 1px solid var(--border);
+            background: chocolate;
+            color: white;
+            padding: 8px 10px;
+            border-radius: 10px;
+            font-weight: 600;
+            
+        }
+
+        /* Mobile hamburger */
+        .hamburger{
+            display:none;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 8px 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .backdrop{
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            backdrop-filter: blur(2px);
+            display:none;
+            z-index: 98;
+        }
+
+        /* Content */
+        .content{
+            flex: 1;
+            padding: 24px;
+            height: 100vh;
+            overflow-y: auto; /* scroll main area only */
+            overflow-x: hidden;
+        }
+        /* Remove content padding when showing iframe for full-bleed view */
+        .content.framemode{ padding: 0; }
+        /* Ensure the frame container and iframe occupy full space */
+        #frameContainer{ height: 100%; }
+        #contentFrame{ display:block; width:100%; height:100vh; border:0; margin:0; padding:0; background: transparent; }
+        /* hide scrollbars in .content while keeping it scrollable */
+        .content{ scrollbar-width: none; }
+        .content::-webkit-scrollbar{ display: none; }
+        .header{
+            display:flex; align-items:center; justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .welcome{
+            display:flex; flex-direction: column; gap: 6px;
+        }
+        .welcome h1{ margin:0; font-size: 28px; }
+        .welcome p{ margin:0; color: var(--muted); }
+
+        .cards{
+            display:grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 16px;
+        }
+        .card{
+            grid-column: span 6;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: 0 8px 32px rgba(243, 116, 32, 0.18);
+
+
+        }
+        .welcome-text{
+            color:chocolate;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            letter-spacing: 1px;
+        }
+        h3{
+            color:whitesmoke;
+        }
+        .card h3{ margin-top:0; }
+        .card p{ color: var(--muted); }
+        .card-actions{ display:flex; gap: 10px; flex-wrap: wrap; }
+        .card:hover{
+            transform: scale(1.02);
+        }
+        .btn{
+            display:inline-flex; align-items:center; gap:8px;
+            border:1px solid var(--border);
+            background: var(--panel-2);
+            color: var(--text);
+            padding: 8px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .btn.primary{ background: linear-gradient(chocolate); color:#fff; border-color: transparent; }
+
+        .list{
+            grid-column: span 12;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 8px 32px rgba(243, 116, 32, 0.18);
+
+            
+        }
+        .list ul{ list-style: none; padding:0; margin:0; }
+        .list li{ display:flex; justify-content: space-between; padding: 10px 6px; border-bottom:1px dashed var(--border); }
+        .list li:last-child{ border-bottom:none; }
+        .muted{ color: var(--muted); }
+        .list:hover{
+            transform: scale(1.02);
+        }
+
+        /* CTA button inside card quick-actions (best-fit width/height) */
+        .card-cta{
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            background: linear-gradient(90deg, chocolate, #a0522d);
+            color:#fff;
+            border:none;
+            padding: 10px 18px;
+            height:44px;
+            min-width:160px;
+            border-radius:10px;
+            font-weight:700;
+            text-decoration:none;
+            box-shadow:0 8px 24px rgba(243,116,32,0.12);
+        }
+        @media (max-width:720px){
+            .card-cta{ width:100%; min-width:0; }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px){
+            .sidebar{ width: 240px; }
+            .card{ grid-column: span 12; }
+        }
+        @media (max-width: 720px){
+            body{ display:block; }
+            .sidebar{ position: fixed; left:0; top:0; height:100vh; width: 80%; max-width: 300px; transform: translateX(-100%); transition: transform .25s ease; z-index: 99; }
+            .sidebar.open{ transform: translateX(0); }
+            .menu{ display:flex; flex-direction: column; gap: 6px; overflow: auto; }
+            .theme-toggle{ margin-top: auto; }
+            .content{ padding: 12px; }
+            .hamburger{ display:inline-flex; align-items:center; gap:6px; }
+            .welcome h1{ font-size: 22px; }
+            .cards{ display:block; }
+            .card{ margin-bottom: 12px; }
+            .header{ gap: 8px; }
+        }
+
+        /* logout modal */
+        #logoutModal{
+          display:none;
+          position:fixed;
+          inset:0;
+          background:rgba(0,0,0,0.6);
+          align-items:center;
+          justify-content:center;
+          z-index:9999;
+        }
+        #logoutModal .panel{
+          background:var(--panel);
+          color:var(--text);
+          padding:18px;
+          border-radius:12px;
+          width:320px;
+          text-align:center;
+          box-shadow:0 8px 32px rgba(0,0,0,0.4);
+        }
+        #logoutModal .panel h3{ margin:0 0 8px; color:chocolate; }
+        #logoutModal .panel p{ margin:0 0 16px; color:var(--muted); }
+        #logoutModal .panel .close-btn{
+          background:chocolate;
+          border:none;
+          color:#fff;
+          padding:10px 14px;
+          border-radius:8px;
+          cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar" id="sidebar">
+        <div class="brand">
+            <img class="brand-logo" src="/public/logo.jfif" aria-hidden="true">
+            <div class="brand-name">JOBSPARK</div>
+        </div>
+        <div class="user-box">
+            <div style="font-weight:600;">Welcome, <%= username %> 👋🏽</div>
+            <div class="muted">Manage your jobs and applicants</div>
+        </div>
+        <nav class="menu">
+            <a href="#" data-page="./partials/posts.ejs"> <span> ➤ </span> Post a Job</a>
+            <a href="#" data-page="./partials/my_jobs.ejs"> <span> ☑ </span> My Posted Jobs</a>
+            <a href="#" data-page="./partials/applicants.ejs"> <span> ✉</span> Applicants</a>
+            <a href="#" data-page="./partials/help.ejs"> <span> ⚠ </span> Help</a>
+            <a href="#" data-page="./partials/feedback.ejs"> <span> ★ </span> Feedback</a>
+            <button class="btn" id="logoutbutton"> <span> ✖ </span> Sign out</button>
+        </nav>
+
+    </aside>
+    <div class="backdrop" id="sidebarBackdrop"></div>
+    <main class="content" id="mainContent">
+        <header class="header">
+            <button class="hamburger" id="menuToggle" aria-label="Open menu">☰</button>
+            <div class="welcome">
+                <h1 class="welcome-text">Welcome To JOBSPARK..!</h1>
+                <p>Everything you need to run hiring smoothly.</p>
+            </div>
+        </header>
+        <div id="frameContainer" style="display:none;">
+            <iframe id="contentFrame" src="" allowtransparency="true"></iframe>
+        </div>
+      
+        <section class="cards" id="defaultContent">
+            <div class="card">
+                <h3>Post a Job</h3>
+                <p>Create a new job posting in just a few clicks.</p>
+                <div class="card-actions">
+                    <p>Quick Actions:</p>
+                    <ul>
+                        <li>Quick job postings.</li>
+                        <li>User Friendly.</li>
+                    </ul>
+
+                    <!-- Post a Job button that redirects to the posts partial (best-fit size) -->
+                    <a href="#" class="card-cta" data-page="./partials/posts.ejs">Post a Job</a>
+                </div>
+            </div>
+            <div class="card">
+                <h3>My Posted Jobs</h3>
+                <p>View and manage all the jobs you have posted.</p>
+                <ul class="muted" style="margin-left: 18px;">
+                    <li>Edit or delete job postings</li>
+                    <li>Track applicants per job</li>
+                </ul>
+                <div class="card-actions">
+                    <ul>
+                        <li>Your job postings will be reviewed within 24 hours.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="list">
+                <h3> Applicants</h3>
+                <p class="muted">See who has applied to your postings.</p>
+                <ul>
+                    <li>
+                        <span>Filter by role, skills, or status</span>
+                        <span class="muted">Improve screening</span>
+                    </li>
+                    <li>
+                        <span>Download resumes directly</span>
+                        <span class="muted">PDF/DOCX</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- logout success modal -->
+    <div id="logoutModal" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="panel" role="document">
+        <h3>Successfully logged out</h3>
+        <p>You have been signed out.</p>
+        <button id="logoutCloseBtn" class="close-btn">Close</button>
+      </div>
+    </div>
+
+    <script>
+        (function(){
+            const root = document.documentElement;
+            const saved = localStorage.getItem('jobspark-theme');
+            if(saved === 'light'){
+                root.setAttribute('data-theme','light');
+            }
+            const btn = document.getElementById('themeBtn');
+            if(btn){
+                btn.addEventListener('click', function(){
+                    const isLight = root.getAttribute('data-theme') === 'light';
+                    if(isLight){
+                        root.removeAttribute('data-theme');
+                        localStorage.setItem('jobspark-theme','dark');
+                    }else{
+                        root.setAttribute('data-theme','light');
+                        localStorage.setItem('jobspark-theme','light');
+                    }
+                });
+            }
+
+            // Mobile sidebar toggle
+            const sidebar = document.getElementById('sidebar');
+            const backdrop = document.getElementById('sidebarBackdrop');
+            const toggleBtn = document.getElementById('menuToggle');
+            function openSidebar(){
+                if(!sidebar) return;
+                sidebar.classList.add('open');
+                if(backdrop) backdrop.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+            function closeSidebar(){
+                if(!sidebar) return;
+                sidebar.classList.remove('open');
+                if(backdrop) backdrop.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+            if(toggleBtn){ toggleBtn.addEventListener('click', openSidebar); }
+            if(backdrop){ backdrop.addEventListener('click', closeSidebar); }
+            window.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeSidebar(); });
+            // Allow iframe children to request opening the sidebar
+            window.addEventListener('message', function(ev){
+                try{
+                    if(ev && ev.data && ev.data.type === 'openSidebar'){
+                        openSidebar();
+                    }
+                }catch(_e){/* noop */}
+            });
+        })();
+        // In-place navigation using iframe for full HTML partials
+        (function(){
+            const main = document.getElementById('mainContent');
+            const frame = document.getElementById('contentFrame');
+            const frameContainer = document.getElementById('frameContainer');
+            const links = document.querySelectorAll('[data-page]');
+            const sidebar = document.getElementById('sidebar');
+            const backdrop = document.getElementById('sidebarBackdrop');
+            const header = document.querySelector('.header');
+
+            function setActive(target){
+                links.forEach(function(l){ l.classList.remove('active'); l.removeAttribute('aria-current'); });
+                if(target){ target.classList.add('active'); target.setAttribute('aria-current','page'); }
+            }
+
+            function closeDrawer(){
+                if(sidebar && sidebar.classList.contains('open')){
+                    sidebar.classList.remove('open');
+                    if(backdrop) backdrop.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            }
+
+            function loadPage(page, label){
+                if(!frame || !frameContainer){ return; }
+                if(!page){ return; }
+                // Build absolute URL relative to current path
+                var base = window.location.pathname.replace(/[^\/]+$/, '');
+                var absoluteUrl = new URL(page, window.location.origin + base).href;
+
+                // Toggle visibility
+                var defaultContent = document.getElementById('defaultContent');
+                if(defaultContent){ defaultContent.style.display = 'none'; }
+                frameContainer.style.display = 'block';
+                if(header){ header.style.display = 'none'; }
+                if(main){ main.classList.add('framemode'); }
+
+                // Load frame
+                frame.src = absoluteUrl;
+                // Auto-resize iframe to content height (same-origin only)
+                frame.addEventListener('load', function(){
+                    try{
+                        const doc = frame.contentDocument || frame.contentWindow.document;
+                        if(doc){
+                            // enforce transparent background and inherited typography
+                            const style = doc.createElement('style');
+                            style.textContent = 'html, body{background: transparent !important; margin:0 !important; padding:0 !important; color: inherit; font-family: inherit;} *{box-sizing:border-box;} @media (max-width: 720px){ img, video, canvas{max-width:100%; height:auto;} input, textarea, select, button{ width:100%; } .container, .card, .panel{ max-width:100%; width:100%; margin-left:0; margin-right:0; } }';
+                            doc.head && doc.head.appendChild(style);
+
+                            // mirror theme from parent onto iframe document
+                            const parentTheme = document.documentElement.getAttribute('data-theme');
+                            if(parentTheme){
+                                doc.documentElement.setAttribute('data-theme', parentTheme);
+                            }else{
+                                doc.documentElement.removeAttribute('data-theme');
+                            }
+
+                            
+                            
+                            
+                            // Add responsive CSS with higher specificity
+                            const mobileStyle = doc.createElement('style');
+                            mobileStyle.textContent = `
+                                @media screen and (max-width: 720px) {
+                                    #mobileMenuBtn {
+                                        display: inline-flex !important;
+                                        align-items: center !important;
+                                        gap: 6px !important;
+                                    }
+                                }
+                            `;
+                            doc.head && doc.head.appendChild(mobileStyle);
+                            
+                            // Force show on mobile with multiple checks
+                            function checkAndShow() {
+                                const isMobile = window.innerWidth <= 720 || 
+                                               (frame.contentWindow && frame.contentWindow.innerWidth <= 720) ||
+                                               window.matchMedia('(max-width: 720px)').matches;
+                                if (isMobile) {
+                                    btn.style.display = 'inline-flex';
+                                    console.log('Button shown for mobile size:', window.innerWidth);
+                                } else {
+                                    btn.style.display = 'none';
+                                }
+                            }
+                            
+                            // Check immediately and on resize
+                            checkAndShow();
+                            window.addEventListener('resize', checkAndShow);
+                            if (frame.contentWindow) {
+                                frame.contentWindow.addEventListener('resize', checkAndShow);
+                            }
+                        }
+                        
+                    }catch(_e){
+                        // ignore cross-origin issues
+                        frame.style.height = '100vh';
+                    }
+                }, { once: true });
+                frame.addEventListener('error', function(){
+                    try{ frame.removeAttribute('src'); }catch(_e){}
+                    frameContainer.style.display = 'none';
+                    if(defaultContent){ defaultContent.style.display = 'block'; }
+                    if(header){ header.style.display = ''; }
+                    if(main){ main.classList.remove('framemode'); }
+                }, { once: true });
+                closeDrawer();
+            }
+
+            links.forEach(function(link){
+                link.addEventListener('click', function(e){
+                    e.preventDefault();
+                    const page = link.getAttribute('data-page');
+                    const label = link.textContent && link.textContent.trim();
+                    setActive(link);
+                    loadPage(page, label);
+                });
+            });
+        })();
+        (function(){
+            const logoutBtn = document.getElementById("logoutbutton");
+            const logoutModal = document.getElementById("logoutModal");
+            const logoutClose = document.getElementById("logoutCloseBtn");
+            if(logoutBtn){
+                logoutBtn.addEventListener("click", async function(e){
+                    e.preventDefault();
+                    // call server to clear session (GET /logout exists)
+                    try{
+                        await fetch('/logout', { method: 'GET', credentials: 'same-origin' });
+                    }catch(err){
+                        console.error('logout fetch failed', err);
+                    }
+                    // clear client storage to avoid cached dashboard state
+                    try{ localStorage.clear(); sessionStorage.clear(); }catch(_){}
+                    // stop any iframe/frame from showing
+                    try{
+                        const frame = document.getElementById('contentFrame');
+                        const frameContainer = document.getElementById('frameContainer');
+                        if(frame){ frame.removeAttribute('src'); }
+                        if(frameContainer){ frameContainer.style.display = 'none'; }
+                        const defaultContent = document.getElementById('defaultContent');
+                        if(defaultContent) defaultContent.style.display = 'block';
+                    }catch(_){}
+                    // show modal
+                    if(logoutModal){
+                        logoutModal.style.display = 'flex';
+                        logoutModal.setAttribute('aria-hidden','false');
+                    }else{
+                        // fallback redirect
+                        window.location.replace('/');
+                    }
+                });
+            }
+            if(logoutClose){
+                logoutClose.addEventListener('click', function(){
+                    if(logoutModal){
+                        logoutModal.style.display = 'none';
+                        logoutModal.setAttribute('aria-hidden','true');
+                    }
+                    // replace history so user can't go back to dashboard
+                    window.location.replace('/');
+                });
+            }
+        })();
+     </script>
+</body>
+</html>

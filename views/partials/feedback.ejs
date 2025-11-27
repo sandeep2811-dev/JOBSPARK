@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+    <style>
+        body {
+            background: black;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #222;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        label {
+
+            color:#9aa0a6;
+        }
+        .feedback-container {
+            width: 100%;
+            max-width: 480px;
+            min-width: 320px;
+            margin: 0 auto;
+            background:#121318;
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(243, 116, 32, 0.18);
+            padding: 44px 32px 36px 32px;
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.93) translateY(40px);
+            animation: boxFadeIn 0.8s cubic-bezier(.23,1.01,.32,1) forwards;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        @keyframes boxFadeIn {
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        .feedback-title {
+            color: chocolate;
+            font-size: 2.1rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+            
+        }
+        .stars {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin: 22px 0 28px 0;
+        }
+        .star {
+            font-size: 2.6rem;
+            color: #fff;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .star.selected,
+        .star:hover {
+            color: #ff9800;
+            transform: scale(1.22);
+        }
+        .feedback-message {
+            margin-top: 22px;
+            font-size: 1.12rem;
+            color: green;
+            font-weight: 600;
+        }
+        label, textarea {
+            color: #fff;
+            font-size: 1.08rem;
+        }
+        textarea {
+            background: #222;
+            border-radius: 10px;
+            border: 1px solid  #222 ;
+            width: 100%;
+            margin: 12px 0 22px 0;
+            padding: 10px;
+            resize: vertical;
+        }
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px 0;
+            background: chocolate;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1.08rem;
+            box-shadow: 0 2px 8px rgba(243, 116, 32, 0.12);
+            transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+        }
+        button[type="submit"]:hover {
+            background: #a0522d;
+            box-shadow: 0 4px 16px rgba(243, 116, 32, 0.24);
+            transform: translateY(-2px);
+        }
+        .container h2{
+            display: none;
+        }
+        #mobileMenuBtn {
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            z-index: 9999;
+            border: 1px solid  #2a2f3a;
+            background: transparent; /* match dashboard hamburger */
+            color: white;
+            padding: 8px 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+            display: none;
+            font-family: inherit;
+            width: auto;
+            height: 40px;
+            font-size: 16px;
+            margin-top:20px;
+            
+        }
+        @media screen and (max-width: 720px) {
+            #mobileMenuBtn {
+                display: inline-flex !important;
+                align-items: center;
+                gap: 6px;
+            }
+            .container{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap:1px;
+            }
+        
+            .container h2{
+                display: block;
+                padding-left: 80px;
+                color:chocolate;
+            }
+    body {
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    }
+    .feedback-container {
+        max-width: 90vw;
+        min-width: unset;
+        padding: 24px 8px 18px 8px;
+        border-radius: 14px;
+        margin-top: 90px;
+    }
+    .feedback-title {
+        font-size: 1.3rem;
+        margin-bottom: 16px;
+    }
+    .stars {
+        gap: 8px;
+        margin: 14px 0 18px 0;
+    }
+    .star {
+        font-size: 1.7rem;
+    }
+    textarea {
+        font-size: 1rem;
+        padding: 8px;
+        margin: 8px 0 14px 0;
+    }
+    button[type="submit"] {
+        font-size: 1rem;
+        padding: 10px 0;
+        border-radius: 7px;
+    }
+    .feedback-message {
+        font-size: 1rem;
+        margin-top: 14px;
+    }
+}
+ .message-box{
+            background: var(--panel-2);
+            color: chocolate;
+            border: 1px solid var(--border);
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 700px;
+            text-align: center;
+            display: none;
+        }
+        .message-box.active{
+            display: block;
+        }
+         .loading{
+            display: none;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:blur(2px);
+            z-index: 9999;
+            color:chocolate;
+            font-size: larger;
+            
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <button id="mobileMenuBtn">☰</button>
+        <h2>There is no failure.Only feedback</h2>
+        
+    <div class="feedback-container">
+        
+        <div class="feedback-title">Rate Your Experience</div>
+        <div class="stars" id="starContainer">
+            <span class="star" data-value="1">&#9733;</span>
+            <span class="star" data-value="2">&#9733;</span>
+            <span class="star" data-value="3">&#9733;</span>
+            <span class="star" data-value="4">&#9733;</span>
+            <span class="star" data-value="5">&#9733;</span>
+        </div>
+        <form action="/send-feedback" method="POST" id="feedbackForm">
+            <input type="hidden" id="rating" name="rating" value="0">
+            <label for="feedback">Your Feedback (optional):</label>
+            <textarea id="feedback" name="feedback" rows="3" style="width:100%;margin:10px 0 18px 0;border-radius:8px;background:#222;"></textarea>
+            <button type="submit" style="width:100%;padding:10px 0;background:chocolate;color:#fff;border:none;border-radius:8px;font-weight:700;">Submit</button>
+        </form>
+           <div class="loading">
+       <div class="spinner-border text-light" role="status">
+    <span class="visually-hidden">Sending...</span>
+    </div>
+    </div>
+        <div class="feedback-message" id="feedbackMsg"></div>
+        <% if(locals.message) { %>
+            <div class="message-box active">
+                <p><%=message %></p>
+            </div>
+        <% } %>
+
+    </div>
+    </div>
+    <script>
+        // Star rating logic
+        const stars = document.querySelectorAll('.star');
+        const ratingInput = document.getElementById('rating');
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                const val = parseInt(this.getAttribute('data-value'));
+                ratingInput.value = val;
+                stars.forEach((s, i) => {
+                    s.classList.toggle('selected', i < val);
+                });
+            });
+            star.addEventListener('mouseover', function() {
+                const val = parseInt(this.getAttribute('data-value'));
+                stars.forEach((s, i) => {
+                    s.classList.toggle('selected', i < val);
+                });
+            });
+            star.addEventListener('mouseout', function() {
+                const val = parseInt(ratingInput.value);
+                stars.forEach((s, i) => {
+                    s.classList.toggle('selected', i < val);
+                });
+            });
+        });
+
+        // Feedback form submit logic
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            const rating = ratingInput.value;
+            const feedback = document.getElementById('feedback').value.trim();
+            const msgDiv = document.getElementById('feedbackMsg');
+            msgDiv.textContent = '';
+
+            if (rating === "0") {
+                msgDiv.textContent = "Please select a star rating!";
+                msgDiv.style.color = "red";
+                e.preventDefault(); // Only prevent submit if rating is not selected
+                return;
+            }
+            // Do NOT change any background color or page style here.
+            // The form will submit normally if rating is selected.
+        });
+          setTimeout(function(){
+            var box = document.querySelector('.message-box');
+            if(box){
+                box.style.display = 'none';
+            }
+        }, 6000);
+        const form = document.getElementById('feedbackForm');
+        const loading = document.querySelector('.loading');
+        form.addEventListener('submit', function(){
+            loading.style.display = 'flex';
+        });
+    </script>
+    <script>
+    // Open parent sidebar on mobile when the button is clicked
+    (function(){
+      var btn = document.getElementById('mobileMenuBtn');
+      if(btn){
+        btn.addEventListener('click', function(){
+          try{ window.parent.postMessage({ type: 'openSidebar' }, '*'); }catch(e){}
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

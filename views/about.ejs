@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - JobSpark</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+         body {
+            min-height: 100vh;
+            margin: 0;
+            /* background-image: url("./public/iPad\ _\ Mac\ _\ Wallpaper\ _\ HD\ \(1\).jpeg.jpg"); */
+            background-color: black;
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        body, .page-fade {
+    opacity: 0;
+    animation: fadeInPage 0.7s ease-in forwards;
+}
+ .head{
+            color: chocolate;
+        }
+@keyframes fadeInPage {
+    to {
+        opacity: 1;
+    }
+}
+        .navbar-brand-bg{
+    /* background-image: url(./public/iPad\ _\ Mac\ _\ Wallpaper\ _\ HD\ \(1\).jpeg.jpg); */
+    background-repeat: no-repeat;
+    background-size: 100%;
+    }
+    .logo{
+    width:60px;
+    height:60px;
+    border-radius: 50%;
+}
+.navtext{
+    font-size: 20px;
+    font-weight:50px;
+    color:#ffffff;
+}
+.navbar-nav .nav-link {
+    color: #fff !important;
+}
+.navbar-nav .nav-link.active {
+    color: #fff !important;
+    font-weight: bold;
+}
+        .about-section {
+            max-width: 900px;
+            margin: 48px auto 32px auto;
+           
+            border-radius: 24px;
+            
+            padding: 36px 28px;
+            backdrop-filter: blur(1px);
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+        .about-block {
+            /* background: linear-gradient(135deg, rgba(207,222,243,0.85) 70%, rgba(255,255,255,0.93) 100%); */
+            background-color: black;
+            border-radius: 18px;
+            /* box-shadow: 0 4px 18px rgba(79,140,255,0.10); */
+            box-shadow: 0 8px 32px rgba(243, 116, 32, 0.18);
+            color:white;
+            padding: 32px 24px;
+            margin: 32px auto;
+            max-width: 900px;
+            opacity: 0;
+            transform: translateY(60px) scale(0.98);
+            animation: fadeInUp 0.8s forwards;
+            animation-delay: var(--delay, 0s);
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+        .about-block:hover {
+            box-shadow: 0 8px 32px rgba(243, 116, 32, 0.18);
+            transform: scale(1.03);
+        }
+        .about-block h1, .about-block h2 {
+            color: chocolate;
+            font-weight: 700;
+            margin-bottom: 18px;
+            letter-spacing: 1px;
+            /* text-shadow: 0 2px 8px #e0eafc; */
+            text-align: center;
+        }
+        .about-block h2 {
+            color: chocolate;
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+            text-align: left;
+        }
+        .about-block p, .about-block ul {
+            font-size: 1.08rem;
+            line-height: 1.7;
+        }
+        #title, .nav-link.title#title {
+        color: chocolate;
+        font-weight: 700;
+        letter-spacing: 1px;
+}
+        .about-block ul {
+            padding-left: 18px;
+        }
+        .about-block li {
+            margin-bottom: 8px;
+            color: white;
+        }
+        .custom-line {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, #2563eb 0%, #4f8cff 100%);
+            margin: 28px 0;
+            border-radius: 2px;
+            opacity: 0.3;
+        }
+        .list1{
+            color: chocolate;
+        }
+        @media (max-width: 700px) {
+
+            
+    #menu button{
+        border: none;
+        background: none;   
+        transition: none;
+    }
+    #menu button:active, #menu button:hover{
+        box-shadow: none;
+        transform: none;
+    }
+    #some{
+        margin-left:5px;
+    }
+    #menu{
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 8px;
+        justify-content: center;
+    }
+    #title{
+        margin-left:5px;
+    }
+    .hamaburger{
+        padding-top: 15px;
+        padding-left: 220px;
+        position: absolute;
+        z-index: 4;
+        
+    }
+            .about-section {
+                padding: 18px 8px;
+                max-width: 98vw;
+                padding-top:10px;
+                margin-top: 10px;
+            }
+            .about-block {
+                padding: 10px;
+                max-width: 90vw;
+                margin: 10px;
+            }
+            .about-block h1 {
+                font-size: 1.5rem;
+            }
+            .about-block h2 {
+                font-size: 1.1rem;
+            }
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+       #title{
+        padding-top: 15px;
+       }
+       #some{
+        display: flex;
+        flex-direction: row;
+        margin-top:10px;}
+    </style>
+</head>
+<body>
+   <section class="navtext">
+        <nav class="navbar navbar-expand-lg navbar-brand-bg navbar-dark" id="menu">
+            
+  <div class="container-fluid">
+
+    
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 " id="some">
+        
+        <li class="nav-item">
+            <img src="/public/logo.jfif" alt="logo" class="logo">
+        </li>
+         <li class="nav-item list1">
+          <a class="nav-link title" id="title" href="#"><h4 style="color:chocolate">JOBSPARK</h4></a>
+        </li>
+      </ul>
+
+    </div>
+    <div class="hamaburger">
+      <button id="menu button"class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link " aria-current="page" href="./index.ejs">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="./carriers.ejs">Careers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#">About</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="./contact.ejs">Contact</a>
+        </li>
+        </ul>
+
+
+        </div>
+  </div>
+</nav>
+    </section>
+    <section class="about-section">
+        <div class="about-block" style="--delay:0s;">
+            <h1>About JobSpark</h1>
+            <p>JobSpark is an innovative job portal designed to simplify and streamline the hiring process for both job seekers and recruiters. Whether you're a fresh graduate seeking your first opportunity or a company looking for top talent, JobSpark provides a smart, user-friendly platform to connect the right people with the right jobs.</p>
+        </div>
+        <div class="about-block" style="--delay:0.2s;">
+            <h2>For Job Seekers:</h2>
+            <p>JobSpark allows candidates to:</p>
+            <ul>
+                <li>Create detailed profiles with resumes, skills, and goals</li>
+                <li>Apply to relevant job opportunities with a single click</li>
+                <li>Track application status and interview calls</li>
+                <li>Receive automated recommendations based on their profile</li>
+            </ul>
+        </div>
+        <div class="about-block" style="--delay:0.4s;">
+            <h2>For Recruiters:</h2>
+            <p>Recruiters can access a powerful Admin Panel to:</p>
+            <ul>
+                <li>Post job openings and manage applications</li>
+                <li>View and filter candidate profiles using advanced search tools</li>
+                <li>Schedule and manage interviews</li>
+                <li>Make data-driven hiring decisions with analytics and insights</li>
+            </ul>
+        </div>
+        <div class="about-block" style="--delay:0.6s;">
+            <h2>Why JobSpark?</h2>
+            <ul>
+                <li>Easy-to-use interface for both job seekers and recruiters</li>
+                <li>Secure and efficient platform for managing job applications</li>
+                <li>Automation tools to reduce manual hiring efforts</li>
+                <li>Built to support final-year students, freshers, and experienced professionals</li>
+            </ul>
+            <p>At JobSpark, we aim to ignite careers and accelerate recruitment by bridging the gap between talent and opportunity.</p>
+        </div>
+    </section>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('a').forEach(function(link) {
+        // Only fade out for internal links
+        link.addEventListener('click', function(e) {
+            const href = link.getAttribute('href');
+            if (href && !href.startsWith('http') && !href.startsWith('#') && !link.hasAttribute('target')) {
+                e.preventDefault();
+                document.body.style.transition = 'opacity 0.5s';
+                document.body.style.opacity = 0;
+                setTimeout(function() {
+                    window.location = href;
+                }, 500);
+            }
+        });
+    });
+});
+</script>
+</body>
+</html>

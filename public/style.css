@@ -1,0 +1,296 @@
+body{
+    /*background-image:url("./public/iPad\ _\ Mac\ _\ Wallpaper\ _\ HD\ \(1\).jpeg.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;*/
+    background-color: black;
+    margin: 0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+}
+
+/*.navbar-brand-bg{
+    background-image: url(./public/iPad\ _\ Mac\ _\ Wallpaper\ _\ HD\ \(1\).jpeg.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+}*/
+body, .page-fade {
+    opacity: 0;
+    animation: fadeInPage 0.7s ease-in forwards;
+}
+@keyframes fadeInPage {
+    to {
+        opacity: 1;
+    }
+}
+.container-1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+}
+.logo{
+    width:60px;
+    height:60px;
+    border-radius: 50%;
+}
+.navtext{
+    font-size: 20px;
+    font-weight:50px;
+    color:white;
+}
+
+.navbar{ padding-top: 8px; padding-bottom: 8px; }
+.navbar .nav-link{ padding-left: 12px; padding-right: 12px; }
+.navbar-nav .nav-link {
+    color: white !important;
+}
+.navbar-nav .nav-link.active {
+    color: white !important;
+    font-weight: bold;
+}
+.list1{
+    padding-top: 5px;
+    color: chocolate
+}
+.first{
+    color:chocolate;
+    letter-spacing: 1px;
+}
+.context{
+    color: white;
+    max-width: 720px;
+    line-height: 1.6;
+}
+.container-1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 70vh;
+    max-width: 720px;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+.button-container{
+margin: 10px;
+gap:10px;
+}
+li{
+    color: white;
+    font-size: large;
+}
+.page1{
+    display: flex;
+    flex-direction:row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    min-height: 70vh;
+    padding: 32px 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.form{
+    width:400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border:1px solid black;
+    border-radius: 10px;
+    margin-top:70px;
+    gap:2px;
+    /* background-color: wh; */
+    height:470px;
+    margin-right: 20px;
+    color:white;
+    box-shadow: 0 8px 32px rgba(243, 116, 32, 0.18);
+
+}
+input {
+    border: 1px solid gainsboro;
+    border-radius: 10px;
+    width: 250px;
+    height: 40px;
+    padding: 8px 12px;
+    background-color: transparent;
+    color: white;
+    /* light chocolate/latte shade */
+}
+input::placeholder{ color: rgba(255,255,255,0.75); }
+input:focus{
+    outline: none;
+    border-color: chocolate;
+    box-shadow: 0 0 0 3px rgba(210,105,30,0.25);
+}
+.forget{
+    color:#9aa0a6;
+    text-decoration: none;
+}
+.forget:hover{
+    color: chocolate;
+    text-decoration: underline;
+}
+.submit{
+    border-radius:10px;
+    background-color: chocolate; 
+    border:1px solid black;
+    padding: 10px 16px;
+    color: white;
+    transition: transform .08s ease, box-shadow .2s ease;
+}
+button{
+    border:1px solid black;
+    border-radius: 10px;
+    background-color: rgb(233, 145, 62);
+    padding: 10px 16px;
+    color: #1a1a1a;
+    transition: transform .08s ease, box-shadow .2s ease;
+    
+}
+button:active, .submit:active{ transform: translateY(1px); }
+button:hover{ box-shadow: 0 6px 20px rgba(233,145,62,0.28); }
+.submit:hover{ box-shadow: 0 6px 20px rgba(210,105,30,0.28); }
+a{
+    color:white;
+}
+.register{
+    color:chocolate;
+}
+h3{
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            color: chocolate;
+            letter-spacing: 1px;
+            
+}
+p{
+    font-size: medium;
+}
+#title, .nav-link.title#title {
+    color: chocolate !important;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+.flex{ display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.google-login-btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* =====================
+   Mobile responsive add-ons
+   (non-breaking: only overrides)
+   ===================== */
+@media (max-width: 992px){
+    .container-1{
+        height: auto;
+        max-width: 100%;
+        padding-left: 0;
+        margin-right: 0;
+    }
+    .page1{
+        flex-direction: column;
+        gap: 16px;
+        min-height: auto;
+        padding: 24px 16px;
+    }
+}
+
+@media (max-width: 768px){
+    .first{
+        padding-left: 90px;
+    }
+    .points{
+        padding-left: 40px;
+    }
+    .context{
+        padding-left: 20px;
+        max-width: 100%;
+    }
+    #some{
+        display: flex;
+        flex-direction: row;
+    }
+    #menu button{
+        border: none;
+        background: none;   
+        transition: none;
+    }
+    #menu button:active, #menu button:hover{
+        box-shadow: none;
+        transform: none;
+    }
+    #menu{
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 8px;
+        justify-content: center;
+    }
+    .hamaburger{
+        padding-top: 15px;
+        padding-left: 230px;
+        position: absolute;
+    }
+    .logo{
+        width: 48px;
+        height: 48px;
+    }
+    .navtext{
+        font-size: 18px;
+    }
+    .form{
+        width: 100%;
+        max-width: 480px;
+        margin-right: 0;
+        margin-left: 0;
+        padding: 12px;
+        height: auto;
+    }
+    input{
+        width: 100%;
+        max-width: 100%;
+    }
+    .button-container{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px){
+    h3{
+        font-size: 1.6rem;
+        margin-bottom: 12px;
+    }
+    p{ font-size: 0.95rem; }
+    .first{ font-size: 1rem; }
+    .list1{ font-size: 0.95rem; }
+    .navtext{ font-size: 16px; }
+    .container-1{ padding: 0 12px; }
+    .page1{ gap: 12px; }
+    .form{ padding: 12px; }
+    .submit{
+        width: 100%;
+        padding: 10px 14px;
+    }
+}
+
+/* Improve tap targets on touch devices */
+@media (pointer: coarse){
+    button, .submit, .navbar-nav .nav-link{
+        min-height: 42px;
+    }
+}
+#some{
+    display: flex;
+    flex-direction: row;
+    margin-top:10px;
+}
