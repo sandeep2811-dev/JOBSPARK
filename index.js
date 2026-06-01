@@ -39,15 +39,12 @@ console.log('Loaded API_KEY from .env:', process.env.API_KEY ? '[REDACTED]' : 'u
 const DB_PASSWORD = process.env.database_password || "Sandeep@8900";
 const app = express();
 const port = process.env.port || 3000;
-const db = new pg.Client({
-    user:"postgres",
-    host:"localhost",
-    password:DB_PASSWORD,
-    database:"JOBSPARK",
-    port:5432
-
+const db = new pg.Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
-db.connect();
 
 // ============ PASSPORT GOOGLE OAUTH SETUP ============
 passport.use(new GoogleStrategy(
