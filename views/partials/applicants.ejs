@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Applicants Page</title>
+  <style>
+    :root{
+            --bg: #0b0c10;
+            --panel: #121318;
+            --panel-2: #161823;
+            --text: #e8eaed;
+            --muted: #9aa0a6;
+            --brand: #7c3aed;
+            --brand-2: #22d3ee;
+            --border: #2a2f3a;
+        }
+        [data-theme="light"]{
+            --bg: #f7f8fb;
+            --panel: #ffffff;
+            --panel-2: #f3f4f8;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --brand: #7c3aed;
+            --brand-2: #0891b2;
+            --border: #e5e7eb;
+        }
+        html, body{
+            background: transparent;
+            background-color: black;
+            color: var(--text);
+            margin:0;
+            padding:0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        }
+        h1{
+            color: chocolate;
+            letter-spacing: 1px;
+            margin: 0 0 8px 0;
+            padding-left: 90px;
+            padding-top: 20px;
+        }
+        p{
+            padding-left: 90px;
+            margin-top: -10px;
+            color: var(--muted);
+        }
+    .header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0px;
+      gap:50px;
+    }
+    .header input, .header select {
+      padding: 8px;
+      margin-right: 10px;
+    }
+
+    .applicants {
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border: 1px solid var(--border);
+      max-width: 80%;
+      margin-left: 90px;
+      padding-top:30px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .applicants:hover{
+        transform: scale(1.02);
+    }
+    tr{
+        border-bottom: 1px solid var(--border);
+    }
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background: var(--panel);
+    }
+    .status {
+      padding: 5px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      color: white;
+    }
+    .new { background: #27ae60; }
+    .review { background: #f39c12; }
+    .shortlisted { background: #2980b9; }
+    .rejected { background: #e74c3c; }
+
+    .actions button {
+      padding: 6px 10px;
+      margin-right: 5px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .view { background: #3498db; color: white; }
+    .shortlist { background: #2ecc71; color: white; }
+    .reject { background: #e74c3c; color: white; }
+    input{
+        border: 1px solid #ccc ;
+        border-radius: 10px;
+        background: var(--panel-2);
+        color: var(--text);
+    }
+    input:hover{
+        border: 1px solid chocolate;
+        box-shadow: 0 8px 32px rgba(243, 116, 32, 0.18);
+    }
+    select{
+        border: 1px solid #ccc ;
+        border-radius: 10px;
+        background: var(--panel-2);
+        color: var(--text);
+    }
+    select:hover{
+        border: 1px solid chocolate;
+        box-shadow: 0 8px 32px rgba(243, 116, 32, 0.18);
+    }
+    .actions{
+        display: flex;
+        flex-direction: column;
+        gap:6px;
+    }
+    tr{
+      color:white;
+    }
+     #mobileMenuBtn {
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            z-index: 9999;
+            border: 1px solid var(--border);
+            background: var(--panel);;
+            color: white;
+            padding: 10px 10px;
+            margin-top:20px;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+            display: none;
+            font-family: inherit;
+            padding-left:12px;
+            width:40px;
+            height:40px;
+            font-size:16px;
+        }
+        
+        @media screen and (max-width: 720px) {
+            #mobileMenuBtn {
+                display: inline-flex !important;
+                align-items: center;
+                gap: 6px;
+            }
+            h1{
+                padding-left: 90px;
+                font-size: 30px;
+            }
+            
+            p{
+                padding-left: 90px;
+                font-size: 12px;
+                padding-top: 5px;
+            }
+            .filters{
+                display: flex;
+                flex-direction: row;
+                gap: 6px;
+                padding-left: 20px;
+
+                
+            }
+            input{
+                width: 140px;
+                padding: 10px;
+                padding-left: 20px;
+            }
+            select{
+                width: 120px;
+                padding: 6px;
+            }   
+            .applicants{
+                padding-top: 10px;
+                max-width: 90%;
+                margin-left: 20px;
+                overflow-x: auto;
+            }  
+            .header{
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+        }
+  </style>
+</head>
+<body>
+
+  <!-- Page Header -->
+  <div class="header">
+    <button id="mobileMenuBtn">☰</button>
+    <div class="title">
+        <h1>Applicants page </h1>
+        <p>Manage and review job applicants efficiently.</p>
+    </div>
+    <div class="filters">
+      <input type="text" placeholder="Search applicants...">
+      <select>
+        <option>Status</option>
+        <option>New</option>
+        <option>Shortlisted</option>
+        <option>Rejected</option>
+      </select>
+      <select>
+        <option>Sort By</option>
+        <option>Experience</option>
+      </select>
+    </div>
+    <h2></h2>
+  </div>
+
+  <!-- Applicants Table -->
+   
+  <div class="applicants">
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Job Applied</th>
+          <th>Email</th>
+          <th>Experience</th>
+          <th>Status</th>
+          <th>Resume</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if(locals.applicants) {%>
+        <% applicants.forEach(function(applicant) { %>
+        <tr>
+          <td><%= applicant.name %></td>
+          <td><%= applicant.jobTitle %></td>
+          <td><%= applicant.email %></td>
+          <td><%= applicant.experience %> years</td>
+          <td><span class="status <%= applicant.status.toLowerCase().replace(' ', '') %>"><%= applicant.status %></span></td>
+          <td><a href="<%= applicant.resumeLink %>" target="_blank">View Resume</a></td>
+          <td class="actions">
+            <div class="actions">
+            <button class="shortlist">Shortlist</button>
+            <button class="reject">Reject</button>
+            </div>
+          </td>
+        </tr>
+        <% }); %>
+        <% } else {%>
+          <tr>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td>N/A</td>
+          </tr>
+          <% }%>
+      </tbody>
+    </table>
+    
+  </div>
+   <script>
+         document.getElementById('mobileMenuBtn').addEventListener('click', function(){
+            try {
+                window.parent.postMessage({ type: 'openSidebar' }, '*');
+            } catch(e) {
+                console.log('Could not open sidebar:', e);
+            }
+        });
+    </script>
+</body>
+</html>
